@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, DatePicker } from 'antd';
+import { Form, DatePicker, Button } from 'antd';
 import moment from 'moment';
 
 const { RangePicker, MonthPicker } = DatePicker;
@@ -20,6 +20,15 @@ class DateTest extends Component {
         defaultValue: parseInt(Math.random() * 10, 10) > 5 ? '至今' : '2017-03'
       })
     }, 200)
+  }
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+
+    
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      console.log(values.data.format(this.state.formatType))
+    })
   }
   render() {
     const { getFieldDecorator, setFieldsValue, fieldsValue } = this.props.form;
@@ -44,13 +53,16 @@ class DateTest extends Component {
 
     return (
 
-      <Form>
+      <Form onSubmit={this.handleSubmit}>
         <FormItem label="时间">
           {
             getFieldDecorator('data', config)(
               <MonthPicker format={this.state.defaultValue === "至今" ? "至今" : this.state.formatType}/>
             )
           }
+        </FormItem>
+        <FormItem label="提交">
+          <Button htmlType="submit">Submit</Button>
         </FormItem>
       </Form>
     )

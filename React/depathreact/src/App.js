@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import { Input } from 'antd';
 import './App.css';
 
 class App extends Component {
@@ -65,8 +66,8 @@ class App extends Component {
 
     return (
       <div className={className}>
-        <p>单行输入框：<input type="text" value={inputValue} onChange={this.handleInputChange}/></p>
-        <p>多行输入框：<textarea value={textareaValue} onChange={this.handleTextareaChange}></textarea></p>
+        <p>单行输入框：<Input type="text" value={inputValue} onChange={this.handleInputChange}/></p>
+        <p>多行输入框：<Input type="textarea" value={textareaValue} onChange={this.handleTextareaChange}/></p>
         <p><input type="radio" value="male" checked={radioValue === "male"} onChange={this.handleRadioChange}/>Male</p>
         <p><input type="radio" value="female" checked={radioValue === "female"} onChange={this.handleRadioChange}/>Female</p>
         <p>
