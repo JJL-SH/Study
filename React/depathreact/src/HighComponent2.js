@@ -1,5 +1,7 @@
 import React from 'react';
-import MyContainer2 from './MyContainer2.js';
+import { Select } from 'antd';
+
+const SelectOption = Select.Option;
 
 export default class HighComponent2 extends React.Component {
   constructor(props) {
@@ -8,7 +10,18 @@ export default class HighComponent2 extends React.Component {
 
   render() {
     return (
-      <MyContainer2 />
+      <Select 
+        mode="tags"
+        style={{width:'100px'}}
+        onSelect={(e) => {
+          console.log(e)
+        }}
+      >
+        <SelectOption value="1111">111</SelectOption>
+        <SelectOption value="2">2</SelectOption>
+        <SelectOption value="3">3</SelectOption>
+        <SelectOption value="4">4</SelectOption>
+      </Select>
     );
   }
 }

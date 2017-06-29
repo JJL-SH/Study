@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { DatePicker } from 'antd';
 
 let iIndex = 0;
 
@@ -34,9 +35,23 @@ const MyContainer = (WrappedComponent) => (
 )
 
 class HighComponent extends React.Component {
+  disabledDate = (current) => {
+
+    var data = 86400;
+
+    if (current) {
+      if (current.valueOf() < (Date.now() - 86400000 * 2) || current.valueOf() > (Date.now() + 86400000 * 2)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
   render() {
     return (
-      <input type="text" name="name" {...this.props}/>
+      <DatePicker 
+        disabledDate={this.disabledDate}
+      />
     );
   }
 }

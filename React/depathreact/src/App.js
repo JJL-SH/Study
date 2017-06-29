@@ -54,7 +54,6 @@ class App extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     let { value } = this.submitInput;
-    console.log(value)
   }
   render() {
     const { inputValue, textareaValue, radioValue, area } = this.state;
@@ -89,8 +88,8 @@ class App extends Component {
           </select>
         </p>
         <form onSubmit={this.handleSubmit}>
-          <input 
-            type="text" 
+          <input
+            type="text"
             defaultValue="test"
             ref={(e) => {this.submitInput = e}}
           />
