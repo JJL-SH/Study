@@ -41,7 +41,7 @@ var cart = {
   _wheels: 4,
   get wheels () {
     return this._wheels;
-  }
+  },
   set wheels (value) {
     if (value < this._wheels) {
       throw new Error('to small');
@@ -49,3 +49,32 @@ var cart = {
     this._wheels = value;
   }
 }
+
+var a = {a:1};
+var b = {a:1};
+console.log(Object.is(a, b))
+
+
+function clone(origin) {
+  let originProto = Object.getPrototypeOf(origin);
+  return Object.assign(Object.create(originProto), origin);
+}
+
+
+const merge = (target, ...soureces) => {
+  return Object.assign(target, ...soureces);
+}
+
+let obj = {foo: 123};
+console.log(Object.getOwnPropertyDescriptor(obj, 'foo'));
+
+var obj = Object.create(someOtherObj);
+obj.method = function () {}
+
+
+let proto = {};
+let obj = {x:10};
+Object.setPrototypeOf(obj, proto);
+proto.y = 20;
+proto.z = 40;
+

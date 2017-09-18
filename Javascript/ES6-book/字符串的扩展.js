@@ -1,8 +1,8 @@
-console.log('\u{20bb7}');
+console.log('u{20bb7}');
 console.log('�'.charCodeAt('0').toString(16));
 
 let hello = 123;
-console.log(hell\u{6f});
+console.log(hellu{6f});
 
 var s = '𠮷';
 console.log(s.length);
