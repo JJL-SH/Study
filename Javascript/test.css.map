@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AA8CA,KAAK;EA7CH,MAAM,EAAE,CAAC;EACT,KAAK,EAAE,CAAC;EAsBN,UAAU,EAAE,eAAkB;EAG5B,WAAW,EAAE,sBAAuB",
+"sources": ["triangle.scss"],
+"names": [],
+"file": "test.css"
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style type="text/css">
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    ul{
+      overflow: hidden;
+    }
+    li{
+      width: 50%;
+      float: left;
+      text-align: center;
+    }
+    img{
+      width: 100%;
+    }
+    .cover{
+/*      position: relative;
+      font-size: 0;
+      display: inline-block;
+      width: 100%;
+*/    }
+    .cover img{
+/*      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+*/    }
+    .cover:after{
+      content: '';
+      padding-top: 50%;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li>
+      <div class="cover"><img src="222.png"></div>
+      <div>text</div>
+    </li>
+  </ul>
+</body>
+</html>
