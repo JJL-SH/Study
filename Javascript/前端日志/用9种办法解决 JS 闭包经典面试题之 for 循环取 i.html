@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+</body>
+
+</html>
+<script type="text/javascript">
+function a() {
+  var p = 0;
+  var innerA = function() {
+    console.log(p);
+  }
+  innerA();
+  p++;
+  innerA();
+}
+a();
+</script>
