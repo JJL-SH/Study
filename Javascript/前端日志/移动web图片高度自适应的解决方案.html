@@ -37,6 +37,14 @@
       padding-top: 50%;
       display: block;
     }
+    #test{
+      height: 20px;
+      width: 100px;
+      border: solid 1px #eee;
+    }
+    #test:empty::before{
+      content: '1111';
+    }
   </style>
 </head>
 <body>
@@ -46,5 +54,6 @@
       <div>text</div>
     </li>
   </ul>
+  <div id="test"></div>
 </body>
 </html>
