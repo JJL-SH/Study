@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <form method="post" action="" id="j-registerForm">
+    <ul>
+      <li>姓名：<input type="text" name="username" id=""></li>
+      <li>手机号码：<input type="text" name="mobile" id=""></li>
+      <li>密码：<input type="password" name="password" id=""></li>
+      <li><button>Submit</button></li>
+    </ul>
+  </form>
+</body>
+</html>
+<script type="text/javascript">
+  var strategies = {
+    isEmpty: function (value, errorMsg) {
+      if (value === '') {
+        return errorMsg;
+      }
+    },
+    minLength: function (value, length, errorMsg) {
+      if (value.length < length) {
+        return errorMsg;
+      }
+    },
+    isMobile: function (value, errorMsg) {
+      if (!/^1[3|5|8][0-9]{9}$/.test(value)) {
+        return errorMsg;
+      }
+    }
+  }
+  var Validator = function () {
+    this.cache = [];
+  }
+  Validator.prototype.add = function (node, rules) {
+    var self = this;
+
+    for (var i = 0,rule; rule = rules[i++];) {
+      (function(rule){
+        var ary = rule.strategy.split(':');
+        var errorMsg = rule.errorMsg;
+
+        self.cache.push(function () {
+          var strategy = ary.shift();
+          ary.push(errorMsg);
+          ary.unshift(node.value);
+          return strategies[strategy].apply(node, ary);
+        })
+      })(rule);
+    }
+  }
+  Validator.prototype.start = function () {
+    var res = '';
+    for (var i = 0,validatorFunc;validatorFunc = this.cache[i++];) {
+      var errorMsg = validatorFunc();
+      if (errorMsg) {
+        res += errorMsg + ';';
+      }
+    }
+    return res;
+  }
+
+  var registerForm = document.getElementById('j-registerForm');
+  var validatorFunc = function () {
+    var validator = new Validator();
+    validator.add(registerForm.username, [{
+      strategy: 'isEmpty',
+      errorMsg: '用户名不能为空'
+    }, {
+      strategy: 'minLength:6',
+      errorMsg: '1111'
+    }]);
+    validator.add(registerForm.mobile, [{
+      strategy: 'isMobile',
+      errorMsg: '手机号码错误'
+    }]);
+    validator.add(registerForm.password, [{
+      strategy: 'minLength:6',
+      errorMsg: '密码长度最少6位'
+    }]);
+
+    return validator.start();
+  }
+  registerForm.onsubmit = function () {
+    var errorMsg = validatorFunc();
+
+    if (errorMsg) {
+      console.log(errorMsg);
+      return false;
+    }
+  }
+</script>

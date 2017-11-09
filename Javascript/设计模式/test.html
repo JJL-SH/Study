@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style type="text/css">
+  .wrapper{
+    white-space: nowrap;
+    overflow: hidden;
+  }
+    .box{
+          display: inline-block;
+    max-width: 100%;
+      border: solid 1px red;
+    }
+    .hd{
+      float: left;
+      border:solid 1px green;
+    }
+    .bd{
+      white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+  <div class="box">
+    <div class="hd">hd</div>
+    <div class="bd">dddd</div>
+  </div>
+  <div class="box">
+    <div class="hd">hd</div>
+    <div class="bd">bdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbd</div>
+  </div>
+  </div>
+</body>
+</html>

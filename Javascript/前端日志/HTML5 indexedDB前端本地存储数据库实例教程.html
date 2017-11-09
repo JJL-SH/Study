@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script type="text/javascript">
+  var db;
+  var DBOpenRequest = window.indexedDB.open('project', 1);
+
+  DBOpenRequest.onsuccess = function (event) {
+    db = DBOpenRequest.result;
+  }
+  DBOpenRequest.onupgradeneeded = function (event) {
+    var db = event.target.result;
+    var objectStore = db.createObjectStore('project', {
+      keyPath: 'id',
+      autoIncrement: true
+    })
+
+    objectStore.createIndex('id', 'id', {
+      unique: true
+    });
+    objectStore.createIndex('name', 'name')
+    objectStore.createIndex('begin', 'begin')
+    objectStore.createIndex('end', 'end')
+    objectStore.createIndex('person', 'person')
+    objectStore.createIndex('remark', 'remark')
+  }
+
+
+  var transaction = db.transaction('project', "readwrite");
+  var objectStore = transaction.objectStore('project');
+  objectStore.add({
+  "name": "第一个项目",
+  "begin": "2017-07-16",
+  "end": "2057-07-16",
+  "person": "张鑫旭",
+  "remark": "测试测试"
+});
+</script>

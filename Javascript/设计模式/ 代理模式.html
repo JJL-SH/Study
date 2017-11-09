@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script type="text/javascript">
+
+
+  // var myImage = (function () {
+  //   var imgNode = document.createElement('img');
+  //   document.body.appendChild(imgNode);
+
+  //   return {
+  //     setSrc: function (src) {
+  //       imgNode.src = src;
+  //     }
+  //   }
+  // })();
+
+  // myImage.setSrc('http://images.spaceref.com/news/2005/SPIRITAWST.l.jpg');
+
+  var myImage = (function () {
+    var imgNode = document.createElement('img');
+    document.body.appendChild(imgNode);
+
+    return {
+      setSrc: function (src) {
+        imgNode.src = src;
+      }
+    }
+  })();
+
+  var proxyImage = (function () {
+    var img = new Image;
+    img.onload = function () {
+      myImage.setSrc(this.src);
+      console.log(this)
+    }
+    return {
+      setSrc: function (src) {
+        myImage.setSrc('https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif');
+        img.src = src;
+      }
+    }
+  })();
+  proxyImage.setSrc('http://images.spaceref.com/news/2005/SPIRITAWST.l.jpg')
+</script>

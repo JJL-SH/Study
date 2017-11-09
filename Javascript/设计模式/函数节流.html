@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+      
+</body>
+</html>
+<script type="text/javascript">
+  var throttle = function (fn, interval) {
+    var timer = null;
+    var firstTime = true;
+
+    return function () {
+      var args = arguments;
+      var _self = this;
+
+      if (firstTime) {
+        fn.apply(_self, args);
+        return firstTime = false;
+      }
+      if (timer) {
+        return false;
+      }
+      timer = setTimeout(function () {
+        clearTimeout(timer);
+        timer = null;
+        fn.apply(_self, args);
+      }, interval || 500);
+    }
+  }
+  window.onresize = throttle(function () {
+    console.log(1);
+  }, 500);
+
+  var timeChunk = function (ary, fn, count) {
+    var obj;
+    var timer;
+    var len = ary.length;
+    var start = function () {
+      for (var i = 0; i < Math.min(count || 1, ary.length); i++) {
+        var obj = ary.shift();
+        fn(obj);
+      }
+    }
+
+    return function () {
+      timer = setInterval(function () {
+        if (!ary.length) {
+          return clearInterval(timer);
+        }
+        start();
+      })
+    }
+  }
+</script>
