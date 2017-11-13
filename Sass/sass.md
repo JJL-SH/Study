@@ -1,5 +1,12 @@
 # 为什么要使用sass
 Sass是一个你所写的CSS样式表和css文件浏览器之间的预处理。元语言，弥补了css语言的一点不足之处。它允许你写css代码不需要重复。这对于创造可维护的样式将是非常有效的。
+- Sass（SCSS）
+- LESS
+- Stylus
+- Turbine
+- Swithch CSS
+- CSS Cacheer
+- DT CSS
 
 #### 常规css文件
 - 修改一个主色麻烦
@@ -195,6 +202,7 @@ p {
 @for $i from 1 through 3 {
   .item-#{$i} { width: 2em * $i; }
 }
-
 ```
+[Function](http://sass-lang.com/documentation/Sass/Script/Functions.html)
+
 
