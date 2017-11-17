@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import CommentInput from './CommentInput';
-import CommentList from './CommentList';
+import CommentInput from './containers/CommentInput';
+import CommentList from './containers/CommentList';
+import WrapWithLoadData from './WrapWithLoadData';
 
 class CommentApp extends Component {
   render() {
@@ -13,4 +14,5 @@ class CommentApp extends Component {
   }
 }
 
+CommentApp = WrapWithLoadData(CommentApp, 'comments');
 export default CommentApp
