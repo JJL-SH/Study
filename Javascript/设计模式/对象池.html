@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+var toolTipFactory = (function () {
+  var toolTipPool = [];
+
+  return {
+    create: function() {
+      if (!toolTipPool.length) {
+        var div = document.createElement('div');
+        document.body.appendChild(div);
+
+        return div;
+      } else {
+        console.log('共享DIV')
+        return toolTipPool.shift();
+      }
+    },
+    recover: function (toolTipNode) {
+      return toolTipPool.push(toolTipNode);
+    }
+  }
+})();
+
+var ary = [];
+for (var i = 0,str; str = ['A+','B+'][i++];) {
+  var toolTip = toolTipFactory.create();
+  toolTip.innerHTML = str;
+  toolTip.id = str
+  ary.push(toolTip);
+}
+
+for (var i = 0,toolTip;toolTip = ary[i++];) {
+  toolTipFactory.recover(toolTip);
+}
+
+for (var i = 0,str; str = ['A-','B-','C-','D-','E-','F-'][i++];) {
+  var toolTip = toolTipFactory.create();
+  toolTip.innerHTML = str;
+}
+
+</script>

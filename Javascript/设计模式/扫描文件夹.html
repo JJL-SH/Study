@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  var Folder = function (name) {
+    this.name = name;
+    this.fiels = [];
+  }
+  Folder.prototype.add = function (file) {
+    this.fiels.push(file);
+  }
+  Folder.prototype.scan = function () {
+    console.log('开始扫描文件夹：' + this.name);
+    for (var i = 0,fiel;fiel = this.fiels[i++];) {
+      fiel.scan();
+    }
+  }
+  var File = function (name) {
+    this.name = name;
+  }
+  File.prototype.add = function () {
+    throw new Error('文件下面不能再添加文件')
+  }
+  File.prototype.scan = function () {
+    console.log('开始扫描文件：' + this.name);
+  }
+
+
+
+
+  
+  var folder1 = new Folder('学习资料');
+  var folder2 = new Folder('Javascrip');
+  var folder3 = new Folder('Jquery');
+  var file1 = new File('javascript设计模式与开发实践')
+  var file2 = new File('精通Jquery')
+  var file3 = new File('重构与模式')
+
+  folder2.add(file1);
+  folder3.add(file2);
+  folder1.add(folder2);
+  folder1.add(folder3);
+  folder1.add(file3);
+
+  var folder4 = new Folder('Nodejs')
+  var file4 = new File('深入浅出Node.js');
+
+  folder4.add(file4);
+  var file5 = new File('javascript语言精髓与编程实践');
+
+  folder1.add(folder4);
+  folder1.add(file5);
+  folder1.scan()
+</script>
