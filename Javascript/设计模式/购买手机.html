@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <p>
+    选择颜色：<select id="j-colorSelect">
+      <option value="">请选择</option>
+      <option value="red">红色</option>
+      <option value="blue">蓝色</option>
+    </select>
+  </p>
+  <p>输入购买数量：<input type="text" id="j-number"></p>
+  <p>您选择了颜色：<span id="j-colorInfo"></span></p>
+  <p>您输入了数量：<span id="j-numberInfo"></span></p>
+  <p><button id="j-next" disabled="true">请选择手机颜色和购买数量</button></p>
+</body>
+</html>
+<script>
+  var nodeColorSelect = document.getElementById('j-colorSelect');
+  var nodeNumberInput = document.getElementById('j-number');
+  var nodeColorInfo = document.getElementById('j-colorInfo');
+  var nodeNumberInfo = document.getElementById('j-numberInfo');
+  var nodeNext = document.getElementById('j-next');
+  var goods = {
+    red: 3,
+    blue: 6
+  }
+  nodeColorSelect.onchange = function () {
+    var color = this.value;
+    var number = nodeNumberInput.value;
+    var stock = goods[color];
+
+    nodeColorInfo.innerHTML = color;
+    nodeNumberInfo.innerHTML = number;
+
+    if (!color) {
+      nodeNext.disabled = true;
+      nodeColorInfo.innerHTML = '请选择手机颜色';
+      return;
+    }
+    if (isNaN(+number) || !+number) {
+      nodeNext.disabled = true;
+      nodeNext.innerHTML = '请输入正确的购买数量';
+      return;
+    }
+    if (number > stock) {
+      nodeNext.disabled = true;
+      nodeNext.innerHTML = '库存不足';
+      return;
+    }
+    nodeNext.disabled = false;
+    nodeNext.innerHTML = '放入购物车';
+}
+</script>
