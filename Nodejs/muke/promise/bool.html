@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Promise animation</title>
+  <style>
+    .ball{
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+    }
+    .ball1{
+      background: red;
+    }
+    .ball2{
+      background: yellow;
+    }
+    .ball3{
+      background: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="ball ball1" style="margin:0;"></div>
+  <div class="ball ball2" style="margin:0;"></div>
+  <div class="ball ball3" style="margin:0;"></div>
+</body>
+</html>
+<script>
+  var ball1 = document.querySelector('.ball1')
+  var ball2 = document.querySelector('.ball2')
+  var ball3 = document.querySelector('.ball3')
+
+  function promiseAnimate(ball, distance) {
+    return new Promise(function(resolve, reject) {
+      var tiemr = setInterval(function () {
+        var marginLeft = parseInt(ball.style.marginLeft, 10);
+
+        if (marginLeft == distance) {
+          resolve();
+          clearInterval(tiemr);
+          return false;
+        } else if (marginLeft < distance) {
+          marginLeft++;
+        } else {
+          marginLeft--;
+        }
+
+        ball.style.marginLeft = marginLeft+'px';
+      }, 13)
+    })
+  }
+  promiseAnimate(ball1, 100).then(function(){
+    return promiseAnimate(ball2, 200);
+  }).then(function() {
+    return promiseAnimate(ball3, 300);
+  }).then(function(){
+    return promiseAnimate(ball3, 150);
+  }).then(function(){
+    return promiseAnimate(ball2, 150);
+  }).then(function(){
+    return promiseAnimate(ball1, 150);
+  }).then(function(){
+    console.log('over');
+  })
+
+</script>
