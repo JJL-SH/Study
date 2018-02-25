@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <button id="execute">执行</button>
+  <button id="undo">执行</button>
+</body>
+</html>
+<script>
+  var TV = {
+    open: function () {
+      console.log('Open TV');
+    },
+    close: function () {
+      console.log('Close TV');
+    }
+  }
+  var OpenTVCommand = function (receiver) {
+    this.receiver = receiver;
+  }
+  OpenTVCommand.prototype.execute = function () {
+    this.receiver.open();
+  }
+  OpenTVCommand.prototype.undo = function () {
+    this.receiver.close();
+  }
+
+  var setCommand = function (command) {
+    document.getElementById('execute').onclick = function () {
+      command.execute();
+    }
+    document.getElementById('undo').onclick = function () {
+      command.undo();
+    }
+  }
+
+  setCommand(new OpenTVCommand(TV));
+</script>
