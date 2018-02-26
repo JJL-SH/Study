@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  var throttle = function (fn, interval) {
+    var func = fn;
+    var timer;
+    var firstTime = true;
+
+    return function () {
+      var args = arguments;
+      var __me = this;
+
+      if (firstTime) {
+        func.apply(__me, args);
+        return firstTime = false;
+      }
+      if (timer) {
+        return false;
+      }
+      timer = setTimeout(function(){
+        clearTimeout(timer);
+        timer = null;
+        func.apply(__me, args);
+      }, interval || 500);
+    }
+  }
+
+  window.onresize = throttle(function(){
+    console.log(1)
+  }, 500  )
+
+
+
+
+
+
+
+  var ary = [];
+
+  for (var i = 1; i <= 8; i++) {
+    ary.push(i);
+  }
+  var timeChunk = function (ary, fn, count) {
+    var timer;
+    var start = function () {
+      for (var i = 0; i < Math.min(count || 1, ary.length); i++) {
+        var obj = ary.shift();
+        fn(obj)
+      }
+    }
+    return function () {
+      timer = setInterval(function () {
+        if (ary.length === 0) {
+          return clearInterval(timer);
+        }
+        start();
+      }, 200)
+    }
+  }
+  var renderFriendList = timeChunk(ary, function (data) {
+    var div = document.createElement('div');
+    div.innerHTML = data;
+    document.body.appendChild(div);
+  }, 8)
+
+  renderFriendList()
+
+
+
+
+
+
+
+
+  var addEvent = function (elem, type, handler) {
+    if (window.addEventListener) {
+      addEvent = function(elem, type, handler){return elem.addEventListener(type, handler, false);}
+    }else if (window.attachEvent) {
+      addEvent = function(elem, type, handler){return elem.attachEvent('on' + type, handler);}
+    }
+    addEvent(elem, type, handler);
+  }
+</script>

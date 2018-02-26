@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+ <button id="loginBtn">Click</button>
+ <div id="div1">div1</div>
+</body>
+</html>
+<script type="text/javascript">
+  var getSingle = function (fn) {
+    var result;
+
+    return function () {
+      return result || (result = fn.apply(this, arguments));
+    }
+  }
+
+  var createLoginLayer = function () {
+    var div = document.createElement('div');
+    div.innerHTML = 'Login';
+    div.style.display = 'none';
+    document.body.appendChild(div);
+    return div;
+  }
+  var createSingleLoginLayer = getSingle(createLoginLayer);
+  var createSingleIframe = getSingle(function(){
+    var iframe = document.createElement('iframe');
+    document.body.appendChild(iframe);
+    return iframe;
+  })
+
+  document.getElementById('loginBtn').onclick = function () {
+    var loginLayer = createSingleLoginLayer();
+    loginLayer.style.display = 'block'
+
+    var iframe = createSingleIframe();
+    iframe.src = 'http://www.baidu.com';
+  }
+
+
+
+
+  var bindEvent = getSingle(function () {
+    document.getElementById('div1').addEventListener('click', function(){
+      console.log('msg')
+    }, false)
+
+    return true
+  })
+  var render = function () {
+    console.log('start');
+    bindEvent();
+  }
+
+  render()
+  render()
+  render()
+</script>
