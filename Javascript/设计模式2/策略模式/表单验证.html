@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <form id="registerForm" method="post">
+    <input type="text" name="username">
+    <input type="text" name="password">
+    <input type="text" name="mobile">
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
+<script type="text/javascript">
+  // strategies 策略
+  var strategies = {
+    isNoEmpty: function (value, errorMsg) {
+      if (value === '') {
+        return errorMsg;
+      }
+    },
+    minLength: function (value, length, errorMsg) {
+      if (value.length < length) {
+        return errorMsg;
+      }
+    },
+    isMobile: function (value, errorMsg) {
+      if (!/^1\d{10}$/ig.test(value)) {
+        return errorMsg;
+      }
+    }
+  }
+
+  var Validator = function () {
+    this.cache = [];
+  }
+  Validator.prototype.add = function (dom, validators) {
+    var self = this;
+
+    for (var i = 0,validator;validator = validators[i++];) {
+      (function(validator){
+        var ary = validator.rule.split(':')
+        self.cache.push(function () {
+          var stratergy = ary.shift();
+          ary.unshift(dom.value)
+          ary.push(validator.errorMsg)
+          return strategies[stratergy].apply(dom, ary)
+        })
+      })(validator)
+    }
+  }
+  Validator.prototype.start = function () {
+    for (var i = 0,validatorFunc;validatorFunc = this.cache[i++];) {
+      var msg = validatorFunc();
+      if(msg){
+        return msg;
+      }
+    }
+  }
+  var validataFunc = function () {
+    var validator = new Validator();
+
+    validator.add(registerForm.username, [{
+      rule: 'isNoEmpty', 
+      errorMsg: '用户名不能为空'
+    },{
+      rule: 'minLength:2',
+      errorMsg: 'error'
+    }]);
+    validator.add(registerForm.password, [{
+      rule: 'minLength:6', 
+      errorMsg: '密码长度不能少于6位'
+    }]);
+    validator.add(registerForm.mobile, [{
+      rule: 'isMobile', 
+      errorMsg: '手机号码格式不正确'
+    }]);
+
+    return validator.start();
+  }
+
+  var registerForm = document.getElementById('registerForm')
+  registerForm.onsubmit = function () {
+    var errorMsg = validataFunc()
+    if(errorMsg) {
+      alert(errorMsg)
+      return false;
+    }
+  }
+
+
+
+
+
+</script>
