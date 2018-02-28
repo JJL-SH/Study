@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script type="text/javascript">
+  var myImage = (function () {
+    var imgNode = document.createElement('img')
+    document.body.appendChild(imgNode)
+
+    return {
+      setSrc: function (src) {
+        imgNode.src = src;
+      }
+    }
+  })()
+  
+  var proxyImage = (function () {
+    var img = new Image;
+    img.onload = function () {
+      myImage.setSrc(this.src)
+    }
+    return {
+      setSrc: function (src) {
+        myImage.setSrc('https://loading.io/assets/img/pricing/ninja.gif')
+        img.src = src
+      }
+    }
+  })()
+
+  proxyImage.setSrc('https://pre00.deviantart.net/5c86/th/pre/i/2014/024/6/a/the_supernova___big_size_by_era_7-d73eleh.jpg')
+</script>
