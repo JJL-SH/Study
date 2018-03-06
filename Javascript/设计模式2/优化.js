@@ -1,7 +1,5 @@
 function getUser(path, callback) {
-    return $.get(path, function(info) {
-        return callback(info);
-    })
+    return $.get(path, callback)
 }
 
 getUser('/api/user', function(resp) {
