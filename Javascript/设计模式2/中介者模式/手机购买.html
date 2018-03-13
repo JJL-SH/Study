@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <p>
+    <label>
+      选择颜色：
+      <select id="colorSelect">
+        <option value="">请选择</option>
+        <option value="red">红色</option>
+        <option value="blue">蓝色</option>
+      </select>
+    </label>
+  </p>
+  <p>
+    <label>
+      选择内存：
+      <select id="memorySelect">
+        <option value="">请选择</option>
+        <option value="32G">32G</option>
+        <option value="16G">16G</option>
+      </select>
+    </label>
+  </p>
+  <p>
+    <label>
+      输入购买数量：
+      <input type="text" id="numberInput">
+    </label>
+  </p>
+  <p>
+    <label>
+      您选择了颜色：
+      <div id="colorInfo"></div>
+    </label>
+  </p>
+  <p>
+    <label>
+      您选择了内存：
+      <div id="memoryInfo"></div>
+    </label>
+  </p>
+  <p>
+    <label>
+      您输入了数量：
+      <div id="numberInfo"></div>
+    </label>
+  </p>
+  <p>
+    <button id="nextBtn" disabled="true">请选择手机颜色和购买数量</button>
+  </p>
+</body>
+</html>
+<script type="text/javascript">
+  var colorSelect = document.getElementById('colorSelect')
+  var memorySelect = document.getElementById('memorySelect')
+  var numberInput = document.getElementById('numberInput')
+  var colorInfo = document.getElementById('colorInfo')
+  var memoryInfo = document.getElementById('memoryInfo')
+  var numberInfo = document.getElementById('numberInfo')
+  var nextBtn = document.getElementById('nextBtn')
+  
+  var goods = {
+    'red|32G': 3,
+    'red|16G': 0,
+    'blue|32G': 1,
+    'blue|16G': 6
+  }
+
+  var mediator = (function () {
+    function change(obj) {
+      var color = colorSelect.value;
+      var memory = memorySelect.value;
+      var number = numberInput.value;
+      var stock = goods[color+'|'+memory];
+
+      if (obj === colorSelect) {
+        colorInfo.innerHTML = color;
+      } else if (obj === memorySelect) {
+        memoryInfo.innerHTML = memory;
+      } else if (obj === numberInput) {
+        numberInfo.innerHTML = number;
+      }
+
+      if (!color) {
+        return setState(true, '请选择手机颜色');
+      }
+
+      if (!memory) {
+        return setState(true, '请选择内存大小')
+      }
+
+      if (!Number.isInteger(number - 0) || (number <= 0)) {
+        return setState(true, '请输入正确的购买数量')
+      }
+
+      if (number > stock) {
+        return setState(true, '当前选择产品没有库存')
+      }
+
+      setState(false, '放入购物车')
+    }
+    function setState(state, text){
+      nextBtn.disabled = state;
+      nextBtn.innerHTML = text
+    }
+    return {
+      change:change,
+      setState: setState
+    }
+  })()
+
+  colorSelect.onchange = function () {
+    mediator.change(this)
+  }
+  memorySelect.onchange = function () {
+    mediator.change(this)
+  }
+  numberInput.onchange = function () {
+    mediator.change(this)
+  }
+
+
+</script>
