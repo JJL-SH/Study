@@ -25,7 +25,7 @@
     }
   }
   document.getElementById = document.getElementById.before(function () {
-    console.log(1)
+    console.log(1);
   })
 
   var button = document.getElementById('button')
@@ -45,13 +45,26 @@
 
 
 
+
+
+
   var before = function (fn, beforeFn) {
     return function () {
       beforeFn.apply(this, arguments)
       return fn.apply(this, arguments)
     }
   }
-  var a = before(function(){alert(3)}, function(){alert(4)})
-  a = before(a, function(){alert(1)})
+  var a = before(function(){console.log(3)}, function(){console.log(4)})
+  a = before(a, function(){console.log(1)})
   a()
+
+
+
+  var func = function (param) {
+    console.log(param)
+  }
+  func = func.before(function (param) {
+    param.b = 'b'
+  })
+  func({a:'a'})
 </script>
