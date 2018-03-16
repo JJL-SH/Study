@@ -15,5 +15,5 @@ let friend = {
 }
 
 Object.setPrototypeOf(friend, person);
-console.log(friend.getGreeting())
-console.log(Object.getPrototypeOf(friend) === person)
+console.log(friend.getGreeting());
+console.log(Object.getPrototypeOf(friend) === person);
