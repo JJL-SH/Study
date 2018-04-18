@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style> 
+    .box{
+      width: 400px;
+      height: 300px;
+      border: solid 1px red;
+      text-align: justify;
+    }
+    .box:before{
+      content: '';
+      display: inline-block;
+      height: 100%;
+    }
+    .box:after{
+      content: '';
+      display: inline-block;
+      width: 100%;
+    }
+    b{
+      display: inline-block;
+      width: 20px;
+      height: 100px;
+      background: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="box"><b></b>
+    <b></b>
+    <b></b>
+    <b></b>
+  </div>
+</body>
+</html>

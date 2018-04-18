@@ -10,6 +10,7 @@
       position: relative;
       display: inline-block;
       color: transparent;
+      border: solid 1px red;
     }
 
     img::after{
@@ -22,9 +23,12 @@
       background: #000;
       color: #fff;
     }
+    img:hover:after{
+      display: block
+    }
   </style>
 </head>
 <body>
-  <img alt="xxxx">  
+  <img alt="xxxx" src="./image.jpg">  
 </body>
 </html>

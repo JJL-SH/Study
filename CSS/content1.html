@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style type="text/css">
+    .list{
+      counter-reset:increment;
+      list-style: none;
+    }
+    
+    .item:before{
+      content: counters(increment, '_')'. ';
+      counter-increment: increment;
+    }
+  </style>
+</head>
+<body>
+  <ul class="list">
+    <li class="item">test context</li>
+    <li class="item">test context</li>
+    <li class="item">test context</li>
+    <li class="item">test context</li>
+    <li class="item">test context</li>
+    <li class="item">test context</li>
+    <li class="item">
+      test context
+      <ul class="list">
+        <li class="item">test context</li>
+        <li class="item">test context</li>
+        <li class="item">test context</li>
+      </ul>
+    </li>
+  </ul>
+</body>
+</html>
