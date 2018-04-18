@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    input[type=search]::-webkit-search-cancel-button{
+    -webkit-appearance: none;
+}
+    input{
+      width: 200px;
+      height: 30px;
+      line-height: 30px;;
+      border: solid 1px red;
+      margin: 0;
+      padding: 0;
+    }
+    input:valid + label{
+      visibility: visible;
+    }
+    label{
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      margin: 0 0 0 -32px;
+      cursor: pointer;
+      visibility: hidden;
+    }
+    label:after{
+      position: absolute;
+      content: 'X';
+      width: 20px;
+      height: 20px;
+      left: 0;
+      top:0;
+      right:0;
+      bottom: 0;
+      margin: auto;
+      border-radius: 10px;
+      background: #999;
+      color: #fff;
+      text-align: center;
+      line-height: 20px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <input type="search" id="search" required><label for="search"></label>
+</body>
+</html>
