@@ -20,33 +20,32 @@
 
 
 
-function timeout(ms) {
-  return new Promise((res) => {
-    setTimeout(res, ms);
-  })
-}
-async function asyncPrint(value, ms) {
-  await timeout(ms);
-  console.log(value);
-}
-asyncPrint('hello world', 50)
+// function timeout(ms) {
+//   return new Promise((res) => {
+//     setTimeout(res, ms);
+//   })
+// }
+// async function asyncPrint(value, ms) {
+//   await timeout(ms);
+//   console.log(value);
+// }
+// asyncPrint('hello world', 50)
 
 
-const asyncIterable = createAsyncIterable(['a', 'b']);
-const asyncIterator = asyncIterable[Symbol.asyncIterator]();
+// const asyncIterable = createAsyncIterable(['a', 'b']);
+// const asyncIterator = asyncIterable[Symbol.asyncIterator]();
 
-asyncIterator.next().then((iterResule1) => {
-  console.log(iterResule1);
+// asyncIterator.next().then((iterResule1) => {
+//   console.log(iterResule1);
 
-  return asyncIterator.next();
-}).then((iterResule2) => {
-  console.log(iterResule2);
+//   return asyncIterator.next();
+// }).then((iterResule2) => {
+//   console.log(iterResule2);
 
-  return asyncIterator.next();
-}).then((iterResule3) => {
-  console.log(iterResule3);
-})
-
+//   return asyncIterator.next();
+// }).then((iterResule3) => {
+//   console.log(iterResule3);
+// })
 
 
 
